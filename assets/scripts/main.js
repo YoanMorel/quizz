@@ -4,14 +4,14 @@ var questionsList = ['A quoi pense Paul le matin en arrivant à la Manu ?,Coddin
   'Qu\'est ce que Damien utilise obstinément en JS et tout cela en vain ?,===,r,**,>>,<<',
   'A qui appartient le PC que Manu a piraté ? (CYBER SECURITE !),Anousone,Laura,Quentin,r,Alexandre Denurra',
   'Question pour Patrick : de quelle équipe de football notre bien aimé Jean-Pierre Foucault national est-il fan ?,Olympique de Marseille,r,Paris Saint Germain,Olympique Lyonnais,Le Havre Athlétique Club',
-  'question,rep1,rep2,r,rep3,rep4',
-  'question,rep1,rep2,rep3,rep4,r',
-  'question,rep1,r,rep2,rep3,rep4',
+  'Comment se créent les vagues ?,Par le mouvement de hanches de Beyoncé,Par le vent et la mécanique des fluides,r,Par le mouvement incessant de Patrick dans la salle de cours de La Manu,La marée (les moules et les frites donc miam)',
+  'Comment se créent une image dans l\'oeil humain?,Par impression directe sur la rétine,Le cerveau fait un alert(),Par impression d\'une image inversée au fond de l\'oeil,r,Avec des lunettes (sans lunettes c\'est du fake en fait ils voient rien)',
+  'Combien d\ années sont protégés les droits d\'auteur,70 ans,r,20 ans,30 ans,Et ta mère ?',
   'question,rep1,rep2,rep3,r,rep4',
   'question,rep1,r,rep2,rep3,rep4'
 ]; // Tableau de chaines contenant questions et réponses
 
-var userIdAnswer = []; // Tableau contenant l'ID des LI cliquées
+var userIdAnswer = ['','','','','','','','','','']; // Tableau contenant l'ID des LI cliquées
 var checkDoneTab = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // Pour vérifier si checkAnswer a déjé été appelée
 var prevBtn = document.getElementById('btnPrev'); // Pour mettre en surbrillance après réponse
 var nextBtn = document.getElementById('btnNext'); // Pour mettre en surbrillance après réponse
@@ -56,7 +56,7 @@ function setOnclick() { // Crée les event onclick dans le DOM
   }
 }
 
-function resetColor() { // Fonction qui boucle sur les class pour reset les couleurs après clieck event sur les BTN
+function resetColor() { // Fonction qui boucle sur les class pour reset les couleurs après click event sur les BTN
   for (let i = 0; i <= 3; i++) {
     liPointer[i].classList.remove('list-group-item-success');
   }
