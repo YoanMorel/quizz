@@ -44,31 +44,31 @@ function checkAnswer(elem) { // Va vérifier si t'as la culture en toi
   supprOnclick();
 }
 
-function supprOnclick() {
+function supprOnclick() { // Supprime les event onclick dans le DOM
   for (let i = 0; i <= 3; i++) {
     liPointer[i].removeAttribute('onclick');
   }
 }
 
-function setOnclick() {
+function setOnclick() { // Crée les event onclick dans le DOM
   for (let i = 0; i <= 3 ; i++) {
     liPointer[i].setAttribute('onclick', 'checkAnswer(this)');
   }
 }
 
-function resetColor() { // Fonction qui boucle sur les class pour reset les couleurs
+function resetColor() { // Fonction qui boucle sur les class pour reset les couleurs après clieck event sur les BTN
   for (let i = 0; i <= 3; i++) {
-    liPointer('li')[i].classList.remove('list-group-item-success');
+    liPointer[i].classList.remove('list-group-item-success');
   }
   for (let j = 0; j <= 3; j++) {
-    liPointer('li')[j].classList.remove('list-group-item-danger');
+    liPointer[j].classList.remove('list-group-item-danger');
   }
 }
 
 function nextQuestion(elem) {
   resetColor();
   indexQuestion++; // Incrémentation de l'index des questions
-  prevBtn.style = '';
+  prevBtn.style = ''; // Display du prevBTN -> à revoir car dégueulasse
   if (indexQuestion <= checkDoneTab.length) { // Check si il reste des questions à afficher
     makeQuizz();
     if (checkDoneTab[indexQuestion] == 1) {
@@ -86,7 +86,7 @@ function nextQuestion(elem) {
 
 function prevQuestion() {
   resetColor();
-  if (indexQuestion != 0) {
+  if (indexQuestion != 0) { // Vérifie si l'index n'est pas à 0
     indexQuestion--; // Décrémentation de l'index des questions
     makeQuizz();
     if (indexQuestion == 0) {
