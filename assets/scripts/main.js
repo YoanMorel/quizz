@@ -11,12 +11,12 @@ var questionsList = ['A quoi pense Paul le matin en arrivant à la Manu ?,Coddin
   'Choisir parmi ces réponses : ,Je suis la bonne réponse,r,Je suit la bonne réponse,Je suis la bonne réponce,Je suis la bone réponse'
 ]; // Tableau de chaines contenant questions et réponses
 
-var userIdAnswer = ['', '', '', '', '', '', '', '', '', '']; // Tableau contenant l'ID des LI cliquées
-var checkDoneTab = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // Pour vérifier si checkAnswer a déjé été appelée
+var userIdAnswer = new Array(10); // Tableau contenant l'ID des LI cliquées
+var checkDoneTab = new Array(10); // Pour vérifier si checkAnswer a déjé été appelée
 var quizzBlockPointer = $('#quizzBlock'); // Pointeur vers la DIV quizz
 var recapBlockPointer = $('#recapBlock'); // Pointeur vers la DIV recap
-var prevBtn = $('#btnPrev'); // Pour mettre en surbrillance après réponse
-var nextBtn = $('#btnNext'); // Pour mettre en surbrillance après réponse
+var prevBtn = $('#btnPrev'); // Pointeur vers le BTN Prev
+var nextBtn = $('#btnNext'); // Pointeur vers le BTN Next
 var liTags = $('li'); // Pointeur vers tous les elem LI
 var indexQuestion = 0; // Pour parcourir les tableaux - Question en cours
 var rightAnswer = ''; // Chaine qui contiendra la bonne réponse
@@ -24,8 +24,8 @@ var rightAnswer = ''; // Chaine qui contiendra la bonne réponse
 prevBtn.hide();
 recapBlockPointer.hide(); // Set le display du BTN Prev et du bloc recap dès le chargement de la page
 
-
-function makeQuizz() { // Fabrique à questions-réponses
+// Fabrique à questions-réponses
+function makeQuizz() {
   var answers = questionsList[indexQuestion].split(','); // Découpe la chaine
   rightAnswer = answers[answers.indexOf('r') - 1]; // Récupère l'indice de la bonne réponse
   answers.splice(answers.indexOf('r'), 1); // Elimine le Flag
@@ -38,24 +38,28 @@ function makeQuizz() { // Fabrique à questions-réponses
   $('#question').text(question); // affichage de la question
 }
 
-function makeRecap() { // Efface le bloc Quizz et affiche le récapitulatif du quizz
+// Efface le bloc Quizz et affiche le récapitulatif du quizz
+function makeRecap() {
   quizzBlockPointer.hide();
   recapBlockPointer.show();
 }
 
-function supprOnclick() { // Supprime les event onclick dans le DOM
+// Supprime les event onclick dans le DOM
+function supprOnclick() {
   liTags.each(function(index) {
     $(this).removeAttr('onclick');
   });
 }
 
-function setOnclick() { // Crée les event onclick dans le DOM
+// Crée les event onclick dans le DOM
+function setOnclick() {
   liTags.each(function() {
     $(this).attr('onclick', 'checkAnswer($(this))')
   });
 }
 
-function resetColor() { // Fonction qui boucle sur les class pour reset les couleurs après click event sur les BTN
+// Fonction qui boucle sur les class pour reset les couleurs après click event sur les BTN
+function resetColor() {
   liTags.each(function(index) {
     $(this).removeClass('list-group-item-success');
   })
@@ -65,7 +69,8 @@ function resetColor() { // Fonction qui boucle sur les class pour reset les coul
   });
 }
 
-function checkAnswer(elem) { // Va vérifier si t'as la culture en toi
+// Va vérifier si t'as la culture en toi
+function checkAnswer(elem) {
   checkDoneTab.splice(indexQuestion, 1, 1); // T'as cliqué, c'est trop tard
   userIdAnswer.splice(indexQuestion, 1, elem.attr('id'));
 
@@ -73,7 +78,6 @@ function checkAnswer(elem) { // Va vérifier si t'as la culture en toi
     elem.addClass('list-group-item-success');
   } else {
     elem.addClass('list-group-item-danger');
-    //rendre les autres elem incliquable
   }
   supprOnclick();
 }
