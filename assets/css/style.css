@@ -1,0 +1,7 @@
+body.fadeSuccess {
+  background-color: green;
+}
+
+body.fadeDanger {
+  background-color: red;
+}
