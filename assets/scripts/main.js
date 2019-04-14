@@ -12,12 +12,14 @@ var questionsList = ['A quoi pense Paul le matin en arrivant à la Manu ?,Coddin
 ]; // Tableau de chaines contenant questions et réponses
 
 var userIdAnswer = new Array(10); // Tableau contenant l'ID des LI cliquées
+var userAnswer = new Array(10); // Tableau contenant les réponses de l'utilisateur
 var checkDoneTab = new Array(10); // Pour vérifier si checkAnswer a déjé été appelée
 var quizzBlockPointer = $('#quizzBlock'); // Pointeur vers la DIV quizz
 var recapBlockPointer = $('#recapBlock'); // Pointeur vers la DIV recap
 var prevBtn = $('#btnPrev'); // Pointeur vers le BTN Prev
 var nextBtn = $('#btnNext'); // Pointeur vers le BTN Next
 var liTags = $('li'); // Pointeur vers tous les elem LI
+var liRecapTags = $('#recapList li'); // Pointeur vers tous les elme LI dans la DIV recap
 var indexQuestion = 0; // Pour parcourir les tableaux - Question en cours
 var rightAnswer = ''; // Chaine qui contiendra la bonne réponse
 
@@ -42,6 +44,15 @@ function makeQuizz() {
 function makeRecap() {
   quizzBlockPointer.hide();
   recapBlockPointer.show();
+
+  liRecapTags.each(function(index) {
+    if (!userAnswer[index]) {
+      $(this).text('Oops, vous n\'avez pas répondu à cette question');
+    } else {
+      // Coloriser Vert ou Rouge
+      $(this).text(userAnswer[index]);
+    }
+  });
 }
 
 // Supprime les event onclick dans le DOM
@@ -73,6 +84,7 @@ function resetColor() {
 function checkAnswer(elem) {
   checkDoneTab.splice(indexQuestion, 1, 1); // T'as cliqué, c'est trop tard
   userIdAnswer.splice(indexQuestion, 1, elem.attr('id'));
+  userAnswer.splice(indexQuestion, 1, elem.text());
 
   if (elem.text() == rightAnswer) { // Colorise en fonction de la réponse
     elem.addClass('list-group-item-success');
